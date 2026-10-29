@@ -1,0 +1,84 @@
+@{
+    var ctrl = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var nav = new[]
+    {
+        (grp: "Workspace",          c: "Dashboard",   icon: "layout-dashboard", label: "Overview",       badge: "",  warn: false),
+        (grp: "Fleet management",   c: "Vehicles",    icon: "truck",            label: "Vehicles",       badge: "",  warn: false),
+        (grp: "Fleet management",   c: "Drivers",     icon: "users",            label: "Drivers",        badge: "",  warn: false),
+        (grp: "Fleet management",   c: "Customers",   icon: "contact-round",    label: "Customers",      badge: "",  warn: false),
+        (grp: "Delivery operations", c: "Deliveries",  icon: "package",          label: "Deliveries",     badge: "6", warn: false),
+        (grp: "Delivery operations", c: "Assignments", icon: "container",        label: "Cargo loading",  badge: "",  warn: false),
+        (grp: "Delivery operations", c: "Routes",      icon: "route",            label: "Route planning", badge: "",  warn: false),
+        (grp: "Delivery operations", c: "Shifts",      icon: "calendar-clock",   label: "Driver shifts",  badge: "",  warn: false),
+        (grp: "Cost & care",        c: "Maintenance", icon: "wrench",           label: "Maintenance",    badge: "3", warn: true),
+        (grp: "Cost & care",        c: "Fuel",        icon: "fuel",             label: "Fuel records",   badge: "",  warn: false),
+        (grp: "Cost & care",        c: "Expenses",    icon: "wallet",           label: "Expenses",       badge: "",  warn: false)
+    };
+    var lastGroup = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@ViewData["Title"] - FleetOps</title>
+<meta name="theme-color" content="#3B2D80" />
+<link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+<link rel="icon" href="~/favicon.ico" sizes="any" />
+<link rel="preload" href="~/fonts/mulish-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="~/css/fleetops.css" asp-append-version="true" />
+<script src="~/lib/lucide/lucide.min.js"></script>
+</head>
+<body>
+<div class="shell">
+<aside class="rail" id="rail">
+    <a class="brand" asp-controller="Dashboard" asp-action="Index" aria-label="FleetOps home">
+        <img src="~/img/logo-mark.svg" alt="" />
+        <span class="wordmark">Fleet<b>Ops</b></span>
+    </a>
+    <nav aria-label="Main">
+        @foreach (var n in nav)
+        {
+            if (n.grp != lastGroup)
+            {
+                lastGroup = n.grp;
+                <div class="nav-label">@n.grp</div>
+            }
+            var active = string.Equals(ctrl, n.c, StringComparison.OrdinalIgnoreCase);
+            <a class="nav-link @(active ? "active" : "")" asp-controller="@n.c" asp-action="Index" aria-label="@n.label">
+                <i data-lucide="@n.icon"></i><span>@n.label</span>
+                @if (n.badge != "")
+                {
+                    <em class="@(n.warn ? "warn" : "")">@n.badge</em>
+                }
+            </a>
+        }
+    </nav>
+    <div class="rail-user">
+        <span class="avatar">JE</span>
+        <div><b>Jana Elhenawy</b><small>Fleet Manager</small></div>
+    </div>
+</aside>
+<div class="main">
+    <header class="topbar">
+        <div class="crumb">
+            <button class="icon-btn sm mobile-menu" id="mobileMenu" aria-label="Open menu"><i data-lucide="menu"></i></button>
+            <span>Workspace</span><i data-lucide="chevron-right"></i><b>@(ViewData["Section"] ?? "Overview")</b>
+        </div>
+        <div class="top-actions">
+            <label class="search"><i data-lucide="search"></i><input id="globalSearch" placeholder="Search anything..." /></label>
+            <button class="icon-btn" data-toast="You're all caught up!" aria-label="Notifications"><i data-lucide="bell"></i><span class="dot"></span></button>
+            <span class="avatar" title="Jana Elhenawy">JE</span>
+        </div>
+    </header>
+    <div class="content">
+        @RenderBody()
+        <footer>© 2026 FleetOps <span>Move smarter. Deliver better.</span><span class="system"><i></i> All systems operational</span></footer>
+    </div>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="~/js/fleetops.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

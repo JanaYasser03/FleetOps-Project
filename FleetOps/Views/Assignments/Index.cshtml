@@ -1,0 +1,108 @@
+@{
+    ViewData["Title"] = "Cargo loading";
+    ViewData["Section"] = "Cargo loading";
+}
+<section class="page-head">
+    <div class="back">
+        <h1>FL-204 Cargo details</h1>
+        <span class="chip loading"><i></i>Loading</span>
+    </div>
+    <div class="actions">
+        <button class="btn" data-toast="Manifest view will be connected in the backend phase."><i data-lucide="eye"></i>View manifest</button>
+        <button class="btn yellow" id="dispatchBtn"><i data-lucide="flag"></i>Dispatch truck</button>
+    </div>
+</section>
+
+<div class="cargo">
+    <div class="cargo-col left">
+        <article class="card">
+            <div class="card-head"><h3>Truck information</h3></div>
+            <div class="driver">
+                <span class="avatar">OH</span>
+                <div><small>Driver</small><b>Omar Hassan</b></div>
+                <button class="icon-btn sm" data-toast="Calling driver is a demo interaction." aria-label="Call driver"><i data-lucide="phone"></i></button>
+                <button class="icon-btn sm" data-toast="Messaging is a demo interaction." aria-label="Message driver"><i data-lucide="message-circle"></i></button>
+            </div>
+            <div class="facts">
+                <div><small>Truck ID</small><b>FL-204</b></div>
+                <div><small>Dock</small><b>Dock #3</b></div>
+                <div><small>Started</small><b>08:34 AM</b></div>
+            </div>
+            <div class="leg">
+                <div><b>New Cairo</b><small>Origin</small></div>
+                <div class="leg-track"><i></i><span><i data-lucide="navigation"></i></span></div>
+                <div><b>6th of October</b><small>Destination</small></div>
+            </div>
+            <div class="pair">
+                <button class="btn rect sm" data-toast="Driver changes will be connected later.">Change driver</button>
+                <button class="btn rect sm" data-toast="Route editing lives in Route planning (coming soon).">Edit route</button>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-head"><h3>Capacity &amp; load</h3></div>
+            <div class="cap">
+                <div class="ring" id="ring">
+                    <svg viewBox="0 0 132 132" aria-hidden="true"><circle class="track" cx="66" cy="66" r="55"></circle><circle class="val" id="ringVal" cx="66" cy="66" r="55" stroke-dasharray="345.6" stroke-dashoffset="345.6"></circle></svg>
+                    <div><b id="pct">0%</b><small>Weight</small></div>
+                </div>
+                <div class="cap-nums">
+                    <small>Current load</small><b><span id="curTons">0</span> <small>tons</small></b>
+                    <small>Max. capacity</small><b>13.5 <small>tons</small></b>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-head"><h3>Loading activity log</h3></div>
+            <ul class="log" id="log"></ul>
+        </article>
+    </div>
+
+    <div class="cargo-col">
+        <article class="card stage">
+            <div class="stage-head">
+                <h3>Trailer layout</h3>
+                <div class="key-row"><span>Standard</span><span class="k-express">Express</span><span class="k-same">Same day</span></div>
+            </div>
+            <div class="truck">
+                <svg class="cab" viewBox="0 0 250 262" aria-hidden="true">
+                    <path d="M4 232V166q0-16 16-21l44-14 36-84q5-12 18-12h132v197z" fill="#3B2D80"/>
+                    <path d="M70 126l28-66q2-5 8-5h90v71z" fill="#72D3E8"/>
+                    <path d="M98 126l32-71h26l-32 71z" fill="#fff" opacity=".28"/>
+                    <rect x="4" y="150" width="14" height="22" rx="5" fill="#FAE04D"/>
+                    <rect x="4" y="178" width="246" height="8" fill="#FAE04D"/>
+                    <path d="M150 130h72v8h-72z" fill="#4D3F9E"/>
+                    <rect x="56" y="102" width="12" height="26" rx="4" fill="#35343F"/>
+                    <rect x="0" y="226" width="64" height="16" rx="7" fill="#35343F"/>
+                    <rect x="0" y="242" width="250" height="20" fill="#35343F"/>
+                    <g transform="translate(150 196) scale(.5)"><rect width="64" height="64" rx="18" fill="#FAE04D"/><path d="M18 19a5 5 0 0 1 5-5h5v36h-5a5 5 0 0 1-5-5z" fill="#3B2D80"/><path d="M28 14h20a20 20 0 0 1-20 20z" fill="#4D3F9E"/><path d="M28 36h12a12 12 0 0 1-12 12z" fill="#35343F"/><circle cx="46" cy="46" r="4.5" fill="#35343F"/></g>
+                </svg>
+                <div class="trailer"><div class="slots" id="slots"></div></div>
+                <span class="wheel w1"></span><span class="wheel w2"></span><span class="wheel w3"></span>
+                <span class="ground"></span>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="assign-head">
+                <h3 id="assignTitle">Assign shipment to a slot</h3>
+                <div class="tools">
+                    <label class="field"><i data-lucide="search"></i><input id="shipSearch" placeholder="Search shipment ID" /></label>
+                    <label class="field"><i data-lucide="arrow-up-down"></i>
+                        <select id="shipSort"><option value="pr">Sort by priority</option><option value="kg">Sort by weight</option><option value="id">Sort by ID</option></select>
+                    </label>
+                    <div class="seg" role="group" aria-label="View">
+                        <button class="on" id="viewGrid" aria-label="Grid view"><i data-lucide="layout-grid"></i></button>
+                        <button id="viewList" aria-label="List view"><i data-lucide="list"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="ships" id="ships"></div>
+        </article>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cargo.js" asp-append-version="true"></script>
+}

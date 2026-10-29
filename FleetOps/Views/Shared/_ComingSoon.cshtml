@@ -1,0 +1,17 @@
+<section class="page-head">
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <p>@ViewData["Subtitle"]</p>
+    </div>
+    <div class="actions"><a class="btn" asp-controller="Dashboard" asp-action="Index"><i data-lucide="arrow-left"></i>Back to overview</a></div>
+</section>
+<article class="card soon">
+    <div class="soon-copy">
+        <span class="tile"><i data-lucide="@ViewData["Icon"]"></i></span>
+        <span class="chip yellow">Coming soon</span>
+        <h3>@ViewData["Title"] is on the route map</h3>
+        <p>This section is part of the planned build and has no data yet. It will follow the same cards, colors and Mulish type as the rest of FleetOps.</p>
+        <a class="btn primary" asp-controller="Assignments" asp-action="Index"><i data-lucide="container"></i>Try cargo loading</a>
+    </div>
+    <div class="soon-art" role="img" aria-label="FleetOps geometric pattern"></div>
+</article>

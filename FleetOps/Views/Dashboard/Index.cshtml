@@ -1,0 +1,126 @@
+@{
+    ViewData["Title"] = "Overview";
+    ViewData["Section"] = "Overview";
+}
+<section class="page-head">
+    <div>
+        <h1>Your fleet, in motion.</h1>
+        <p>Thursday, October 29, 2026 · Here's what's happening across your operations today.</p>
+    </div>
+    <div class="actions">
+        <button class="btn" data-toast="Report export will be connected later."><i data-lucide="download"></i>Export report</button>
+        <a class="btn primary" asp-controller="Deliveries" asp-action="Index"><i data-lucide="plus"></i>New delivery</a>
+    </div>
+</section>
+
+<section class="hero">
+    <div class="hero-copy">
+        <h2>Every delivery has <span>a better route.</span></h2>
+        <p>Bring vehicles, people, and deliveries together, so every decision moves you forward.</p>
+        <a class="btn yellow" asp-controller="Assignments" asp-action="Index"><i data-lucide="container"></i>Open cargo loading</a>
+    </div>
+    <div class="hero-chips">
+        <div class="float"><span class="ico"><i data-lucide="clock-3"></i></span><div><b>32 min</b><small>Est. journey</small></div></div>
+        <div class="float"><span class="ico"><i data-lucide="route"></i></span><div><b>18.4 km</b><small>Planned route</small></div></div>
+    </div>
+</section>
+
+<section class="section-title">
+    <div><h2>Operational snapshot</h2><p>Your fleet at a glance</p></div>
+    <button class="btn sm" data-toast="Date filters are demo-only.">Last 30 days<i data-lucide="chevron-down"></i></button>
+</section>
+<section class="stats">
+    <article class="card stat">
+        <div class="stat-top">Total vehicles <span class="tile"><i data-lucide="truck"></i></span></div>
+        <strong>128 <small>vehicles</small></strong>
+        <div class="stat-foot"><b><i data-lucide="trending-up"></i>8.2%</b> vs. last month</div>
+        <div class="spark"><i style="height:30%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:75%"></i><i style="height:100%"></i></div>
+    </article>
+    <article class="card stat">
+        <div class="stat-top">Active deliveries <span class="tile cyan"><i data-lucide="package-check"></i></span></div>
+        <strong>36 <small>in progress</small></strong>
+        <div class="stat-foot"><b><i data-lucide="trending-up"></i>12.4%</b> vs. last month</div>
+        <div class="spark cyan"><i style="height:30%"></i><i style="height:55%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:100%"></i></div>
+    </article>
+    <article class="card stat">
+        <div class="stat-top">On-time rate <span class="tile yellow"><i data-lucide="timer"></i></span></div>
+        <strong>94.8<small>%</small></strong>
+        <div class="stat-foot"><b><i data-lucide="trending-up"></i>2.1%</b> vs. last month</div>
+        <div class="spark yellow"><i style="height:35%"></i><i style="height:55%"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:100%"></i></div>
+    </article>
+    <article class="card stat">
+        <div class="stat-top">Maintenance due <span class="tile grey"><i data-lucide="wrench"></i></span></div>
+        <strong>03 <small>vehicles</small></strong>
+        <div class="stat-foot"><b class="warn">Needs attention</b> next 7 days</div>
+    </article>
+</section>
+
+<section class="grid">
+    <article class="card">
+        <div class="card-head"><div><h3>Delivery activity</h3><p>Delivery volume throughout the week</p></div><button class="icon-btn sm" data-toast="Chart options demo" aria-label="Chart options"><i data-lucide="ellipsis"></i></button></div>
+        <div class="legend"><span>Delivered</span><span class="l-cyan">In progress</span><b>186 <small>total orders</small></b></div>
+        <div class="chart">
+            <div class="ylabels"><span>60</span><span>45</span><span>30</span><span>15</span><span>0</span></div>
+            <div class="plot"><div class="gridlines"></div>
+                <div class="bars-col"><i style="height:55%"></i><i class="lightbar" style="height:20%"></i><small>Mon</small></div>
+                <div class="bars-col"><i style="height:72%"></i><i class="lightbar" style="height:25%"></i><small>Tue</small></div>
+                <div class="bars-col"><i style="height:63%"></i><i class="lightbar" style="height:32%"></i><small>Wed</small></div>
+                <div class="bars-col today"><i style="height:90%"></i><i class="lightbar" style="height:28%"></i><small>Thu</small></div>
+                <div class="bars-col"><i style="height:70%"></i><i class="lightbar" style="height:22%"></i><small>Fri</small></div>
+                <div class="bars-col"><i style="height:48%"></i><i class="lightbar" style="height:18%"></i><small>Sat</small></div>
+                <div class="bars-col"><i style="height:62%"></i><i class="lightbar" style="height:22%"></i><small>Sun</small></div>
+            </div>
+        </div>
+    </article>
+    <article class="card">
+        <div class="card-head"><div><h3>Fleet availability</h3><p>Current vehicle status</p></div><a class="link" asp-controller="Vehicles" asp-action="Index">View fleet<i data-lucide="arrow-up-right"></i></a></div>
+        <div class="availability">
+            <div class="donut"><div><b>128</b><small>Total fleet</small></div></div>
+            <div class="key">
+                <p><span>Available</span><b>82 <small>64%</small></b></p>
+                <p><span class="k-cyan">On delivery</span><b>36 <small>28%</small></b></p>
+                <p><span class="k-yellow">Maintenance</span><b>10 <small>8%</small></b></p>
+            </div>
+        </div>
+        <div class="note"><i data-lucide="info"></i>10 vehicles are currently unavailable due to maintenance.</div>
+    </article>
+</section>
+
+<section class="grid lower">
+    <article class="card">
+        <div class="card-head"><div><h3>Recent deliveries</h3><p>Track the latest delivery orders</p></div><a class="link" asp-controller="Deliveries" asp-action="Index">View all<i data-lucide="arrow-up-right"></i></a></div>
+        <div class="table-scroll">
+            <table class="data-table">
+                <thead><tr><th>Delivery</th><th>Customer</th><th>Driver / vehicle</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td><b>#DL-2084</b><small>Today, 10:42 AM</small></td><td><b>Nova Works</b><small>New Cairo</small></td><td><b>Omar Hassan</b><small>Truck · FL-204</small></td><td><span class="status progress">In progress</span></td></tr>
+                    <tr><td><b>#DL-2083</b><small>Today, 10:18 AM</small></td><td><b>BrightMart</b><small>Maadi</small></td><td><b>Salma Adel</b><small>Van · FL-118</small></td><td><span class="status done">Delivered</span></td></tr>
+                    <tr><td><b>#DL-2082</b><small>Today, 09:56 AM</small></td><td><b>Atlas Pharma</b><small>Heliopolis</small></td><td><b>Youssef Ali</b><small>Van · FL-093</small></td><td><span class="status pending">Pending</span></td></tr>
+                    <tr><td><b>#DL-2081</b><small>Today, 09:31 AM</small></td><td><b>Eastline Co.</b><small>Nasr City</small></td><td><b>Karim Mostafa</b><small>Truck · FL-177</small></td><td><span class="status done">Delivered</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <article class="card">
+        <div class="card-head"><div><h3>Smart recommendations</h3><p>Decision support for dispatch</p></div><span class="smart"><i data-lucide="sparkles"></i>Smart</span></div>
+        <div class="rec-intro"><b>Delivery #DL-2085</b><small>New Cairo → 6th of October</small><span class="chip">High priority</span></div>
+        <div class="option">
+            <span class="tile"><i data-lucide="truck"></i></span>
+            <div><b>FL-204 · Medium truck</b><small>Capacity 1,500 kg · Available</small><small class="good">Meets capacity &amp; availability</small></div>
+            <strong>96<small>match</small></strong>
+        </div>
+        <div class="option">
+            <span class="tile cyan"><i data-lucide="van"></i></span>
+            <div><b>FL-118 · Delivery van</b><small>Capacity 900 kg · Available</small><small>Lower capacity margin</small></div>
+            <strong class="score">82<small>match</small></strong>
+        </div>
+        <div class="disclaimer"><i data-lucide="info"></i>Recommendations are suggestions. The dispatcher makes the final assignment.</div>
+        <a class="btn dark full" asp-controller="Assignments" asp-action="Index">Review recommendations<i data-lucide="arrow-right"></i></a>
+    </article>
+</section>
+
+<div class="alert">
+    <span class="tile"><i data-lucide="calendar-clock"></i></span>
+    <div><b>Maintenance coming up</b><p>3 vehicles have scheduled maintenance in the next 7 days. Review them to keep your fleet ready.</p></div>
+    <a class="btn" asp-controller="Maintenance" asp-action="Index">Review schedule<i data-lucide="arrow-right"></i></a>
+</div>
